@@ -1,1 +1,70 @@
-<!-- Start writing your project code in this file! -->
+<!DOCTYPE html>
+
+<head>
+    <title>MD Academy Quiz</title>
+    <style>
+        body {
+            background-color: white;
+            font-family: Arial, sans-serif;
+            color: #333; 
+            text-align: center;
+            padding: 50px;
+        }
+
+        .logo {
+            margin-bottom: 25px;
+        }
+
+        .logo video {
+            width: 700px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .btn {
+            background-color: #0B6E4F; 
+            color: white;
+            font-size: 20px;
+            padding: 15px 30px;
+            margin: 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 200px; 
+        }
+
+        .btn:hover {
+            background-color: #C8B560; 
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 30px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="logo">
+        <video autoplay loop muted>
+            <source src="MD-gif.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <h1>Welcome to MD Academy! Choose a Field to Study</h1>
+      <button class="btn" onclick="startQuiz('cariology')">Cariology</button>
+      <button class="btn" onclick="startQuiz('radiology')">Radiology</button>
+      <button class="btn" onclick="startQuiz('endo')">Endodontics</button>
+      <button class="btn" onclick="startQuiz('toxicology')">Toxicology</button>
+
+    <script>
+        
+        function startQuiz(field) {
+            alert("You selected " + field + "!");
+        }
+    </script>
+
+</body>
+</html>
