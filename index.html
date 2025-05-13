@@ -252,6 +252,60 @@
             showRadiologyQuestion();
         }
 
+        function showEndodonticsQuestion() {
+            if (currentQuestion < radiQuiz.length) {
+            var questionText = endoQuiz[currentQuestion];
+            var options = endoOptions[currentQuestion];
+
+            var quizContainer = document.getElementById('quiz-container');
+            quizContainer.innerHTML = `<h2>${questionText}</h2>`;
+
+            options.forEach((option, index) => {
+            quizContainer.innerHTML += `<button onclick="checkRadiologyAnswer(${index})">${option}</button>`;
+        });
+            } else {
+              showFinalScore();
+            }
+        }
+
+        function checkEndodonticsAnswer(selectedIndex) {
+            if (selectedIndex === endoAnswers[currentQuestion]) {
+              alert("Correct!");
+              score++;
+            } else {
+              alert("Incorrect!");
+            }
+            currentQuestion++;
+            showEndodonticsQuestion();
+        }
+
+        function showToxicologyQuestion() {
+            if (currentQuestion < toxiQuiz.length) {
+            var questionText = toxiQuiz[currentQuestion];
+            var options = toxiOptions[currentQuestion];
+
+            var quizContainer = document.getElementById('quiz-container');
+            quizContainer.innerHTML = `<h2>${questionText}</h2>`;
+
+            options.forEach((option, index) => {
+            quizContainer.innerHTML += `<button onclick="checkRadiologyAnswer(${index})">${option}</button>`;
+        });
+            } else {
+              showFinalScore();
+            }
+        }
+
+        function checkToxicologyAnswer(selectedIndex) {
+            if (selectedIndex === toxiAnswers[currentQuestion]) {
+              alert("Correct!");
+              score++;
+            } else {
+              alert("Incorrect!");
+            }
+            currentQuestion++;
+            showToxicologyQuestion();
+        }
+
         
         // Function to show the user the final scores
         function showFinalScore() {
