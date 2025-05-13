@@ -1,28 +1,36 @@
 <!DOCTYPE html>
-
+<html lang="en">
 <head>
-    <title>MD Academy Quiz</title>
+    <title>Felicia's dental simulator</title>
     <style>
         body {
-            background-color: white;
+            background-color: #016FB9;
             font-family: Arial, sans-serif;
-            color: #333; 
+            color: white; 
             text-align: center;
             padding: 50px;
+        }
+
+        #myVideo {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1; 
         }
 
         .logo {
             margin-bottom: 25px;
         }
 
-        .logo video {
-            width: 700px;
-            height: auto;
-            border-radius: 10px;
+        .logo img {
+            border-radius: 30px;
+            box-shadow: 0 10px 10px rgba(0,0,0,0.2);
         }
 
         .btn {
-            background-color: #0B6E4F; 
+            background-color: royalblue; 
             color: white;
             font-size: 20px;
             padding: 15px 30px;
@@ -30,42 +38,76 @@
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.2s;
             width: 200px; 
         }
 
         .btn:hover {
-            background-color: #C8B560; 
+            background-color: #A6D9F7;
+            transform: scale(1.05);
         }
 
-        h1 {
-            font-size: 32px;
-            margin-bottom: 30px;
+        #quiz-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: left;
+            display: none;
         }
+
+        #quiz-container h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        #quiz-container button {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 12px;
+            background-color: royalblue;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #quiz-container button:hover {
+            background-color: #A6D9F7;
+        }
+
 
     </style>
 </head>
 <body>
 
+    <video autoplay muted loop id="myVideo">
+        <source src="6021145_Equipment Dentistry Clinic Orthodontics Dental Microscope_By_Artem_Medvediev_Artlist_HD.mp4" type="video/mp4">
+      </video>
+
     <div class="logo">
-        <video autoplay loop muted>
-            <source src="MD-gif.mp4" type="video/mp4">
-        </video>
+            <img src="DENTAL SIMULATOR.jpg" alt="ds logo" style="width:300px;height:300px;">
     </div>
 
-    <h1>Welcome to MD Academy! Choose a Field to Study</h1>
-      <button class="btn" onclick="startQuiz('cariology')">Cariology</button>
-      <button class="btn" onclick="startQuiz('radiology')">Radiology</button>
-      <button class="btn" onclick="startQuiz('endo')">Endodontics</button>
-      <button class="btn" onclick="startQuiz('toxicology')">Toxicology</button>
+    <h1>Welcome to Dental simulator! What do yoo want to study?</h1>
+    <button class="btn" onclick="startQuiz('cariology')">Cariology</button>
+    <button class="btn" onclick="startQuiz('radiology')">Radiology</button>
+    <button class="btn" onclick="startQuiz('endo')">Endodontics</button>
+    <button class="btn" onclick="startQuiz('toxicology')">Toxicology</button>
 
     <div id="quiz-container"></div> 
-    <script>
-        
-   
-    </script>
 
-            // Array with the Cariology quiz questions
+    <script>
+
+        // Variables of the question & score
+        var currentQuestion = 0;
+        var score = 0;
+
+        // Array with the Cariology quiz questions
         var cariQuiz = [
             "Which of the following bacteria is most strongly associated with the initiation of dental caries?",
             "Which sugar is considered the most cariogenic?",
@@ -81,11 +123,7 @@
 
         // Array with the Cariology quiz right answers index number
         var cariAnswers = [0, 2, 1];
-
-       // Variables of the question & score
-        var currentQuestion = 0;
-        var score = 0;
-
+        
         // Function to start the quiz of the chosen field
         function startQuiz(field) {
             if (field === 'cariology') {
@@ -95,8 +133,45 @@
                 document.getElementById('quiz-container').style.display = 'block';
                 showCariologyQuestion();
             } else {
-                alert("Sorry, this field is not yet available!"); // If the user picked something else
+                alert("Sorry, this field is not yet available!"); // Will update later
             }
-        }    
+        }
+
+        function showCariologyQuestion() { // Function to display the questions
+            if (currentQuestion < cariQuiz.length) {
+                var questionText = cariQuiz[currentQuestion];
+                var options = cariOptions[currentQuestion];
+
+                var quizContainer = document.getElementById('quiz-container'); // Questions displayed in quiz container
+                quizContainer.innerHTML = `<h2>${questionText}</h2>`;
+
+                options.forEach((option, index) => {
+                    quizContainer.innerHTML += `<button onclick="checkCariologyAnswer(${index})">${option}</button>`;
+                });
+            } else {
+                showFinalScore();
+            }
+        }
+
+        function checkCariologyAnswer(selectedIndex) { // This function runs when the user selects an answer
+            if (selectedIndex === cariAnswers[currentQuestion]) { // Compares the selected answer to the right answer
+                alert("Correct!"); // alert if the answer is correct
+                score++; // Score if the answer is correct
+            } else {
+                alert("Incorrect!"); // alert if the answer is incorrect
+            }
+            currentQuestion++;
+            showCariologyQuestion(); // shows new question
+        }
+        
+        // Function to show the user the final scores
+        function showFinalScore() {
+            var quizContainer = document.getElementById('quiz-container'); // Shows score in the quiz container
+            quizContainer.innerHTML = `<h2>Quiz Completed!</h2>
+                                       <p>Your score: ${score} / ${cariQuiz.length}</p>
+                                       <button onclick="startQuiz('cariology')">Restart Quiz</button>`; // restart button
+        }
+    </script>
+
 </body>
 </html>
