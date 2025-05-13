@@ -6,4 +6,4 @@
 
 3. Had a logic bug when adding all options to the if-statements. The questions wouldn't change from the first option (cariology questions). Solution: Figured out that I've just forgotten to write "else if", I only wrote "if".
 
-4. 
+4. When I continued coding all the quiz functions to show the quiz & check the answers, I knew there was an error in the code since when I tried running the program nothing happend when I tried to pick the option "Endodontics". My solution: 
