@@ -252,8 +252,8 @@
             showRadiologyQuestion();
         }
 
-        function showEndodonticsQuestion() {
-            if (currentQuestion < radiQuiz.length) {
+        function showEndoQuestion() {
+            if (currentQuestion < endoQuiz.length) {
             var questionText = endoQuiz[currentQuestion];
             var options = endoOptions[currentQuestion];
 
@@ -268,7 +268,7 @@
             }
         }
 
-        function checkEndodonticsAnswer(selectedIndex) {
+        function checkEndoAnswer(selectedIndex) {
             if (selectedIndex === endoAnswers[currentQuestion]) {
               alert("Correct!");
               score++;
@@ -276,7 +276,7 @@
               alert("Incorrect!");
             }
             currentQuestion++;
-            showEndodonticsQuestion();
+            showEndoQuestion();
         }
 
         function showToxicologyQuestion() {
