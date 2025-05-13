@@ -123,7 +123,55 @@
 
         // Array with the Cariology quiz right answers index number
         var cariAnswers = [0, 2, 1];
-        
+
+        // Array with the Radiology questions
+        var radiQuiz = [
+            "A 45-year-old patient comes in for a routine dental check-up. You need to assess the health of the alveolar bone and detect any interproximal caries. Which type of radiograph would you most likely prescribe?",
+            "A patient reports sharp pain in the lower right molar area when biting down. You suspect a periapical abscess. What is the most appropriate radiographic technique to evaluate this?",
+            "A 19-year-old patient is experiencing discomfort and swelling near the back of the mouth. You suspect impacted third molars. Which radiographic technique would give you the best overall view of the jaws and wisdom teeth?"
+        ];
+        // Array with the Radiology options
+        var radiOptions = [
+            ["Panoramic radiograph", "Bitewing radiograph", "Occlusal radiograph", "Periapical radiograph"],
+            ["Bitewing radiograph", "Cone-beam CT", "Periapical radiograph", "Panoramic radiograph"],
+            ["Cephalometric radiograph", "Bitewing radiograph", "Periapical radiograph", "Panoramic radiograph"]
+        ];
+        // Array with the Radiology quiz right answers index number
+        var radiAnswers = [1, 3, 2];
+
+        // Array with the Endodontics questions
+        var endoQuiz = [
+            "A 32-year-old patient complains of lingering pain in the upper left premolar after drinking something cold. You suspect irreversible pulpitis. What is the most appropriate next step in treatment?",
+            "A 10-year-old child presents after falling on the playground, hitting their front tooth. The tooth is discolored and does not respond to vitality tests. What is the most likely diagnosis?",
+            "A 50-year-old patient had a root canal treatment on a mandibular molar two years ago. They now report swelling and tenderness in the same area. A radiograph shows a radiolucency near the root apex. What is the most appropriate treatment?"
+        ];
+        // Array with the Endodontics options
+        var endoOptions = [
+            ["Apply a fluoride varnish", "Perform a pulpectomy", "Place a temporary filling", "Recommend extraction"],
+            ["Reversible pulpitis", "Internal resorption", "Pulp necrosis", "Periapical granuloma"],
+            ["Place a new crown", "Prescribe painkillers only", "Perform root canal retreatment", "Do nothing unless symptoms worsen"]
+         ];
+
+        // Array with the Endodontics quiz correct answer index numbers
+        var endoAnswers = [1, 2, 2];
+
+        // Array with Toxicology questions
+        var toxiQuiz = [
+            "A patient accidentally ingested a large amount of fluoride toothpaste and is now experiencing nausea, abdominal pain, and muscle weakness. What is the most likely diagnosis?",
+            "A 7-year-old child is brought in after swallowing an unknown number of iron tablets. He is vomiting and appears lethargic. What is the first step in management?",
+            "A dental assistant accidentally spills a mercury-containing amalgam capsule and inhales vapors in a poorly ventilated area. What is the most appropriate immediate action?"
+        ];
+
+        // Array with Toxicology answer options
+        var toxiOptions = [
+            ["Fluoride allergy", "Fluoride overdose (acute toxicity)", "Food poisoning", "Iron poisoning"],
+            ["Administer activated charcoal", "Induce vomiting at home", "Immediate hospital referral for chelation therapy", "Give milk and observe at home"],
+            ["Call poison control and evacuate area", "Drink plenty of water", "Ignore if no symptoms appear", "Use an air freshener to neutralize smell"]
+        ];
+
+        // Array with correct Toxicology answer indexes
+        var toxiAnswers = [1, 2, 0];
+
         // Function to start the quiz of the chosen field
         function startQuiz(field) {
             if (field === 'cariology') {
@@ -133,7 +181,7 @@
                 document.getElementById('quiz-container').style.display = 'block';
                 showCariologyQuestion();
             } else {
-                alert("Sorry, this field is not yet available!"); // Will update later
+                alert("Sorry, this field is not yet available!"); // If the user picked something else
             }
         }
 
