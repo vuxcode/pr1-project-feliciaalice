@@ -185,19 +185,19 @@
                 // Show the quiz on the screen:
                 document.getElementById('quiz-container').style.display = 'block';
                 showCariologyQuestion();
-            } if (field === 'radiology') {
+            } else if (field === 'radiology') {
                 currentQuestion = 0; // Keeps track on which question the user is on
                 score = 0; // Keeps track on the users score
                 // Show the quiz on the screen:
                 document.getElementById('quiz-container').style.display = 'block';
                 showRadiologyQuestion();
-            } if (field === 'endo') {
+            } else if (field === 'endo') {
                 currentQuestion = 0; // Keeps track on which question the user is on
                 score = 0; // Keeps track on the users score
                 // Show the quiz on the screen:
                 document.getElementById('quiz-container').style.display = 'block';
                 showEndoQuestion();
-            } if (field === 'toxicology') {
+            } else if (field === 'toxicology') {
                 currentQuestion = 0; // Keeps track on which question the user is on
                 score = 0; // Keeps track on the users score
                 // Show the quiz on the screen:
@@ -233,6 +233,33 @@
             }
             currentQuestion++;
             showCariologyQuestion(); // shows new question
+        }
+
+        function showRadiologyQuestion() { // Function to display the radiology questions
+            if (currentQuestion < cariQuiz.length) {
+                var questionText = cariQuiz[currentQuestion];
+                var options = cariOptions[currentQuestion];
+
+                var quizContainer = document.getElementById('quiz-container'); // Questions displayed in quiz container
+                quizContainer.innerHTML = `<h2>${questionText}</h2>`;
+
+                options.forEach((option, index) => {
+                    quizContainer.innerHTML += `<button onclick="checkRadiologyAnswer(${index})">${option}</button>`;
+                });
+            } else {
+                showFinalScore();
+            }
+        }
+
+        function checkRadiologyAnswer(selectedIndex) { // This function runs when the user selects an answer
+            if (selectedIndex === radiAnswers[currentQuestion]) { // Compares the selected answer to the right answer
+                alert("Correct!"); // alert if the answer is correct
+                score++; // Score if the answer is correct
+            } else {
+                alert("Incorrect!"); // alert if the answer is incorrect
+            }
+            currentQuestion++;
+            showRadiologyQuestion(); // shows new question
         }
         
         // Function to show the user the final scores
