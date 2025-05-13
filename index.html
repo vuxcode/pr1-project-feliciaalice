@@ -221,19 +221,29 @@
                     quizContainer.innerHTML += `<button onclick="checkCariologyAnswer(${index})">${option}</button>`;
                 });
             } else {
-                showFinalScore();
+                showFinalScore('cariology');
             }
         }
 
-        function checkCariologyAnswer(selectedIndex) { // This function runs when the user selects an answer
-            if (selectedIndex === cariAnswers[currentQuestion]) { // Compares the selected answer to the right answer
-                alert("Correct!"); // alert if the answer is correct
-                score++; // Score if the answer is correct
+        function checkCariologyAnswer(selectedIndex) {
+        var buttons = document.querySelectorAll('#quiz-container button');
+
+            if (selectedIndex === cariAnswers[currentQuestion]) {
+               buttons[selectedIndex].style.backgroundColor = '#4CAF50'; // green
+               score++;
             } else {
-                alert("Incorrect!"); // alert if the answer is incorrect
+               buttons[selectedIndex].style.backgroundColor = '#f44336'; // red
+               buttons[cariAnswers[currentQuestion]].style.backgroundColor = '#4CAF50'; // show correct
             }
-            currentQuestion++;
-            showCariologyQuestion(); // shows new question
+
+        // Disable all buttons so user can't click again
+               buttons.forEach(btn => btn.disabled = true);
+
+        // Move to next question after 1 second
+               setTimeout(() => {
+               currentQuestion++;
+               showCariologyQuestion();
+               }, 1000);
         }
 
         function showRadiologyQuestion() {
@@ -248,20 +258,31 @@
             quizContainer.innerHTML += `<button onclick="checkRadiologyAnswer(${index})">${option}</button>`;
         });
             } else {
-              showFinalScore();
+                showFinalScore('radiology'); 
             }
         }
 
         function checkRadiologyAnswer(selectedIndex) {
+        var buttons = document.querySelectorAll('#quiz-container button');
+
             if (selectedIndex === radiAnswers[currentQuestion]) {
-              alert("Correct!");
-              score++;
+               buttons[selectedIndex].style.backgroundColor = '#4CAF50'; // green
+               score++;
             } else {
-              alert("Incorrect!");
+               buttons[selectedIndex].style.backgroundColor = '#f44336'; // red
+               buttons[radiAnswers[currentQuestion]].style.backgroundColor = '#4CAF50'; // show correct
             }
-            currentQuestion++;
-            showRadiologyQuestion();
-        }
+
+    // Disable all buttons so user can't click again
+    buttons.forEach(btn => btn.disabled = true);
+
+    // Move to next question after 1 second
+    setTimeout(() => {
+        currentQuestion++;
+        showRadiologyQuestion();
+    }, 1000);
+    }
+
 
         function showEndoQuestion() {
             if (currentQuestion < endoQuiz.length) {
@@ -272,23 +293,33 @@
             quizContainer.innerHTML = `<h2>${questionText}</h2>`;
 
             options.forEach((option, index) => {
-            quizContainer.innerHTML += `<button onclick="checkRadiologyAnswer(${index})">${option}</button>`;
+            quizContainer.innerHTML += `<button onclick="checkEndoAnswer(${index})">${option}</button>`;
         });
             } else {
-              showFinalScore();
+                showFinalScore('endo'); 
             }
         }
 
         function checkEndoAnswer(selectedIndex) {
-            if (selectedIndex === endoAnswers[currentQuestion]) {
-              alert("Correct!");
-              score++;
-            } else {
-              alert("Incorrect!");
-            }
-            currentQuestion++;
-            showEndoQuestion();
-        }
+    var buttons = document.querySelectorAll('#quiz-container button');
+
+    if (selectedIndex === endoAnswers[currentQuestion]) {
+        buttons[selectedIndex].style.backgroundColor = '#4CAF50'; // green
+        score++;
+    } else {
+        buttons[selectedIndex].style.backgroundColor = '#f44336'; // red
+        buttons[endoAnswers[currentQuestion]].style.backgroundColor = '#4CAF50'; // show correct
+    }
+
+    // Disable all buttons so user can't click again
+    buttons.forEach(btn => btn.disabled = true);
+
+    // Move to next question after 1 second
+    setTimeout(() => {
+        currentQuestion++;
+        showEndoQuestion();
+    }, 1000);
+    }
 
         function showToxicologyQuestion() {
             if (currentQuestion < toxiQuiz.length) {
@@ -299,33 +330,63 @@
             quizContainer.innerHTML = `<h2>${questionText}</h2>`;
 
             options.forEach((option, index) => {
-            quizContainer.innerHTML += `<button onclick="checkRadiologyAnswer(${index})">${option}</button>`;
+            quizContainer.innerHTML += `<button onclick="checkToxicologyAnswer(${index})">${option}</button>`;
         });
             } else {
-              showFinalScore();
+                showFinalScore('toxicology');
             }
         }
 
         function checkToxicologyAnswer(selectedIndex) {
-            if (selectedIndex === toxiAnswers[currentQuestion]) {
-              alert("Correct!");
-              score++;
-            } else {
-              alert("Incorrect!");
-            }
-            currentQuestion++;
-            showToxicologyQuestion();
-        }
+    var buttons = document.querySelectorAll('#quiz-container button');
+
+    if (selectedIndex === toxiAnswers[currentQuestion]) {
+        buttons[selectedIndex].style.backgroundColor = '#4CAF50'; // green
+        score++;
+    } else {
+        buttons[selectedIndex].style.backgroundColor = '#f44336'; // red
+        buttons[toxiAnswers[currentQuestion]].style.backgroundColor = '#4CAF50'; // show correct
+    }
+
+    // Disable all buttons so user can't click again
+    buttons.forEach(btn => btn.disabled = true);
+
+    // Move to next question after 1 second
+    setTimeout(() => {
+        currentQuestion++;
+        showToxicologyQuestion();
+    }, 1000);
+    }
 
         
-        // Function to show the user the final scores
-        function showFinalScore() {
-            var quizContainer = document.getElementById('quiz-container'); // Shows score in the quiz container
-            quizContainer.innerHTML = `<h2>Quiz Completed!</h2>
-                                       <p>Your score: ${score} / ${cariQuiz.length}</p>
-                                       <button onclick="startQuiz('cariology')">Restart Quiz</button>`; // restart button
-        }
-    </script>
+    // Function to show the user the final scores
+    function showFinalScore(field) {
+    var quizContainer = document.getElementById('quiz-container');
+    let totalQuestions;
+
+        switch (field) {
+        case 'cariology':
+            totalQuestions = cariQuiz.length;
+            break;
+        case 'radiology':
+            totalQuestions = radiQuiz.length;
+            break;
+        case 'endo':
+            totalQuestions = endoQuiz.length;
+            break;
+        case 'toxicology':
+            totalQuestions = toxiQuiz.length;
+            break;
+        default:
+            totalQuestions = 0;
+    }
+
+    quizContainer.innerHTML = `<h2>Quiz Completed!</h2>
+                               <p>Your ${field.charAt(0).toUpperCase() + field.slice(1)} score: ${score} / ${totalQuestions}</p>
+                               <button onclick="startQuiz('${field}')">Restart ${field.charAt(0).toUpperCase() + field.slice(1)} Quiz</button>`;
+}
+
+</script>
 
 </body>
 </html>
