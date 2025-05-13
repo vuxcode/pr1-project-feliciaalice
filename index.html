@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Felicia's dental simulator</title>
+
     <style>
         body {
             background-color: #016FB9;
@@ -81,7 +85,6 @@
             background-color: #A6D9F7;
             transform: scale(1.05);
         }
-
 
     </style>
 </head>
@@ -182,8 +185,26 @@
                 // Show the quiz on the screen:
                 document.getElementById('quiz-container').style.display = 'block';
                 showCariologyQuestion();
-            } else {
-                alert("Sorry, this field is not yet available!"); // If the user picked something else
+            } if (field === 'radiology') {
+                currentQuestion = 0; // Keeps track on which question the user is on
+                score = 0; // Keeps track on the users score
+                // Show the quiz on the screen:
+                document.getElementById('quiz-container').style.display = 'block';
+                showRadiologyQuestion();
+            } if (field === 'endo') {
+                currentQuestion = 0; // Keeps track on which question the user is on
+                score = 0; // Keeps track on the users score
+                // Show the quiz on the screen:
+                document.getElementById('quiz-container').style.display = 'block';
+                showEndoQuestion();
+            } if (field === 'toxicology') {
+                currentQuestion = 0; // Keeps track on which question the user is on
+                score = 0; // Keeps track on the users score
+                // Show the quiz on the screen:
+                document.getElementById('quiz-container').style.display = 'block';
+                showToxicologyQuestion();
+            } else { 
+                alert("Sorry, this option isn't valid!"); // If the user picked something else
             }
         }
 
