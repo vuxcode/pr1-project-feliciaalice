@@ -1,6 +1,6 @@
 # Bug List
 
-1. Started out wanting to create a quiz where the user could pick from many different choices, that would include many more functions. Figured out a program like that would be too complicated for my skill level, so I chose to focus the quiz on only one study field, and one "startQuiz" function. Then a function for every "step" of the quiz. 
+1. Started out wanting to create a quiz where the user could pick from many different choices, that would include many more functions. Figured out a program like that would be too complicated for my skill level, so I chose to focus the quiz on only one study field, and one "startQuiz" function. Then a function for every "step" of the quiz. Ended up doing functions for each field, but not in the same way I first had in mind.
 
 2. Had to figure out how to properly get the quiz to be displayed in the "quiz container". Solution: document.getElementById('quiz-container') to display the quiz/options/answers etc. 
 
@@ -10,4 +10,4 @@
 
 5. The hardest challenge so far was to change the correct/incorrect results from the questions to a simple alert(""); to my idea that I wanted the correct answers to be green & the incorrect ones to be red. I did my research to find out how to do it. My solution:
 
-6. I needed to have the end result to show for each different fields. Solution:  
+6. I needed to have the end result to show for each different fields, did some research on W3schools + Reddit. Solution: Tried some different methods but ended up with using a Switch-statement.
