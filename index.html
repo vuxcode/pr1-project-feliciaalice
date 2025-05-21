@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
 
+    <title>Felicia's dental simulator</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Felicia's dental simulator</title>
 
     <style>
         body {
@@ -116,12 +116,18 @@
     <button class="btn" onclick="startQuiz('toxicology')">Toxicology</button>
     
     <div id="quiz-container"></div> 
+    <div id="timer">Time left: 10s</div>
 
     <script>
 
         // Global variables of the question & score
         var currentQuestion = 0;
         var score = 0;
+        
+        // Global variables for the timer
+        let timerInterval;
+        let timeLeft = 10; 
+
 
         // Array with Cariology questions
         var cariQuiz = [
@@ -208,7 +214,36 @@
         document.getElementById('quiz-container').style.display = 'none'; // Hide the quiz if invalid
         }
         }
-      
+
+        function startTimer(field) {
+    clearInterval(timerInterval);
+    timeLeft = 10;
+    document.getElementById("timer").innerText = `Time left: ${timeLeft}s`;
+
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        document.getElementById("timer").innerText = `Time left: ${timeLeft}s`;
+
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            currentQuestion++;
+            switch (field) {
+                case 'cariology':
+                    showCariologyQuestion();
+                    break;
+                case 'radiology':
+                    showRadiologyQuestion();
+                    break;
+                case 'endo':
+                    showEndoQuestion();
+                    break;
+                case 'toxicology':
+                    showToxicologyQuestion();
+                    break;
+            }
+        }
+    }, 1000);
+    }
 
         function showCariologyQuestion() { // Function to display the questions
             if (currentQuestion < cariQuiz.length) {
@@ -221,20 +256,23 @@
                 options.forEach((option, index) => {
                     quizContainer.innerHTML += `<button onclick="checkCariologyAnswer(${index})">${option}</button>`;
                 });
+                startTimer('cariology');
             } else {
+                clearInterval(timerInterval);
                 showFinalScore('cariology');
             }
         }
 
         function checkCariologyAnswer(selectedIndex) {
+            clearInterval(timerInterval); // Stop the timer immediately
         var buttons = document.querySelectorAll('#quiz-container button');
 
             if (selectedIndex === cariAnswers[currentQuestion]) {
-               buttons[selectedIndex].style.backgroundColor = '#4CAF50'; // green
+               buttons[selectedIndex].style.backgroundColor = '#4CAF50'; // green if correct
                score++;
             } else {
-               buttons[selectedIndex].style.backgroundColor = '#f44336'; // red
-               buttons[cariAnswers[currentQuestion]].style.backgroundColor = '#4CAF50'; // show correct
+               buttons[selectedIndex].style.backgroundColor = '#f44336'; // red if incorrect
+               buttons[cariAnswers[currentQuestion]].style.backgroundColor = '#4CAF50'; // show correct in green
             }
 
         // Disable all buttons so user can't click again
@@ -258,12 +296,15 @@
             options.forEach((option, index) => {
             quizContainer.innerHTML += `<button onclick="checkRadiologyAnswer(${index})">${option}</button>`;
         });
+        startTimer('radiology');
             } else {
+                clearInterval(timerInterval);
                 showFinalScore('radiology'); 
             }
         }
 
         function checkRadiologyAnswer(selectedIndex) {
+            clearInterval(timerInterval); // Stop the timer immediately
         var buttons = document.querySelectorAll('#quiz-container button');
 
             if (selectedIndex === radiAnswers[currentQuestion]) {
@@ -295,12 +336,15 @@
             options.forEach((option, index) => {
             quizContainer.innerHTML += `<button onclick="checkEndoAnswer(${index})">${option}</button>`;
         });
+        startTimer('endo');
             } else {
+                clearInterval(timerInterval);
                 showFinalScore('endo'); 
             }
         }
 
         function checkEndoAnswer(selectedIndex) {
+            clearInterval(timerInterval); // Stop the timer immediately
             var buttons = document.querySelectorAll('#quiz-container button');
 
             if (selectedIndex === endoAnswers[currentQuestion]) {
@@ -332,12 +376,15 @@
         options.forEach((option, index) => {
         quizContainer.innerHTML += `<button onclick="checkToxicologyAnswer(${index})">${option}</button>`;
         });
+        startTimer('toxicology');
         } else {
+            clearInterval(timerInterval);
             showFinalScore('toxicology');
         }
     }
 
     function checkToxicologyAnswer(selectedIndex) {
+        clearInterval(timerInterval); // Stop the timer immediately
     var buttons = document.querySelectorAll('#quiz-container button');
 
     if (selectedIndex === toxiAnswers[currentQuestion]) {
