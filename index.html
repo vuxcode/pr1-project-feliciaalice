@@ -224,7 +224,6 @@
         currentQuestion = 0; // Reset question tracker
         score = 0; // Reset score
         document.getElementById('quiz-container').style.display = 'block'; // Show quiz container
-        console.log("Quiz started for field:", field);
         
         // If-statements for each field option
         if (field === 'cariology') {
@@ -317,7 +316,6 @@
         function showRadiologyQuestion() {
             if (currentQuestion < radiQuiz.length) {
             var questionText = radiQuiz[currentQuestion];
-            console.log("Showing Radiology Question:", question);
             var options = radiOptions[currentQuestion];
 
             var quizContainer = document.getElementById('quiz-container');
@@ -358,7 +356,6 @@
         function showEndoQuestion() {
             if (currentQuestion < endoQuiz.length) {
             var questionText = endoQuiz[currentQuestion];
-            console.log("Showing Endo Question:", question);
             var options = endoOptions[currentQuestion];
 
             var quizContainer = document.getElementById('quiz-container');
@@ -399,7 +396,6 @@
     function showToxicologyQuestion() {
         if (currentQuestion < toxiQuiz.length) {
         var questionText = toxiQuiz[currentQuestion];
-        console.log("Showing Toxicology Question:", question);
         var options = toxiOptions[currentQuestion];
 
         var quizContainer = document.getElementById('quiz-container');
