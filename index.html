@@ -15,13 +15,21 @@
             padding: 50px;
         }
 
-        #myVideo {
+        .video-background {
             position: fixed;
-            right: 0;
-            bottom: 0;
-            min-width: 100%;
-            min-height: 100%;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
             z-index: -1; 
+        }
+
+        .video-background iframe {
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            pointer-events: none; 
         }
 
         .logo {
@@ -113,9 +121,14 @@
 </head>
 <body>
 
-    <video autoplay muted loop id="myVideo">
-        <source src="6021145_Equipment Dentistry Clinic Orthodontics Dental Microscope_By_Artem_Medvediev_Artlist_HD.mp4" type="video/mp4">
-      </video>
+    <div class="video-background">
+        <iframe 
+          src="https://player.vimeo.com/video/1086711416?h=369f2ac10e&autoplay=1&muted=1&loop=1&background=1" 
+          frameborder="0" 
+          allow="autoplay; fullscreen" 
+          allowfullscreen>
+        </iframe>
+    </div>
 
     <div class="logo">
             <img src="https://i.imgur.com/9bgYxsf.jpeg" alt="ds logo" style="width:300px;height:300px;">
@@ -128,7 +141,7 @@
     <button class="btn" onclick="startQuiz('toxicology')">Toxicology</button>
     
     <div id="quiz-container"></div> 
-    <div id="timer">Time left: 10s</div>
+    <div id="timer">Time left: 15s</div>
 
     <script>
 
@@ -138,7 +151,7 @@
         
         // Global variables for the timer
         let timerInterval;
-        let timeLeft = 10; 
+        let timeLeft = 15; 
 
 
         // Array with Cariology questions
@@ -229,7 +242,7 @@
 
         function startTimer(field) {
     clearInterval(timerInterval);
-    timeLeft = 10;
+    timeLeft = 15;
     document.getElementById("timer").innerText = `Time left: ${timeLeft}s`;
 
     timerInterval = setInterval(() => {
