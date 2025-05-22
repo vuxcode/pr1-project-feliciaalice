@@ -224,6 +224,7 @@
         currentQuestion = 0; // Reset question tracker
         score = 0; // Reset score
         document.getElementById('quiz-container').style.display = 'block'; // Show quiz container
+        console.log("Quiz started for field:", field);
         
         // If-statements for each field option
         if (field === 'cariology') {
@@ -243,6 +244,7 @@
         function startTimer(field) {
     clearInterval(timerInterval);
     timeLeft = 15;
+    console.log("Timer started for", field);
     document.getElementById("timer").innerText = `Time left: ${timeLeft}s`;
 
     timerInterval = setInterval(() => {
@@ -251,6 +253,7 @@
 
         if (timeLeft <= 0) {
             clearInterval(timerInterval);
+            console.log("Time ran out for question");
             currentQuestion++;
             switch (field) {
                 case 'cariology':
@@ -273,6 +276,7 @@
         function showCariologyQuestion() { // Function to display the questions
             if (currentQuestion < cariQuiz.length) {
                 var questionText = cariQuiz[currentQuestion];
+                console.log("Showing Cariology Question:", question);
                 var options = cariOptions[currentQuestion];
 
                 var quizContainer = document.getElementById('quiz-container'); // Questions displayed in quiz container
@@ -313,6 +317,7 @@
         function showRadiologyQuestion() {
             if (currentQuestion < radiQuiz.length) {
             var questionText = radiQuiz[currentQuestion];
+            console.log("Showing Radiology Question:", question);
             var options = radiOptions[currentQuestion];
 
             var quizContainer = document.getElementById('quiz-container');
@@ -353,6 +358,7 @@
         function showEndoQuestion() {
             if (currentQuestion < endoQuiz.length) {
             var questionText = endoQuiz[currentQuestion];
+            console.log("Showing Endo Question:", question);
             var options = endoOptions[currentQuestion];
 
             var quizContainer = document.getElementById('quiz-container');
@@ -393,6 +399,7 @@
     function showToxicologyQuestion() {
         if (currentQuestion < toxiQuiz.length) {
         var questionText = toxiQuiz[currentQuestion];
+        console.log("Showing Toxicology Question:", question);
         var options = toxiOptions[currentQuestion];
 
         var quizContainer = document.getElementById('quiz-container');
